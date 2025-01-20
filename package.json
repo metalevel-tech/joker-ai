@@ -10,7 +10,7 @@
     "build:worker": "opennextjs-cloudflare",
     "dev:worker": "wrangler dev --port 8771 --ip 0.0.0.0",
     "preview:worker": "pnpm run build:worker && pnpm run dev:worker",
-    "deploy:worker": "pnpm run build:worker && wrangler deploy"
+    "deploy:worker": "pnpm run build:worker && pnpm dlx wrangler deploy"
   },
   "dependencies": {
     "browserslist": "^4.24.4",
