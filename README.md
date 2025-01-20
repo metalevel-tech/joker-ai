@@ -34,3 +34,10 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Cloudflare refs
+
+- <https://developers.cloudflare.com/workers/frameworks/framework-guides/nextjs>
+- <https://developers.cloudflare.com/workers/runtime-apis/bindings/>
+- <https://dash.cloudflare.com/4a7a2036848ac74fb634965693b22939/workers/services/view/joker-ai/production>
+- <https://dash.cloudflare.com/4a7a2036848ac74fb634965693b22939/workers/kv/namespaces/6a845ba65ea34ecc8191ed43f77de123/metrics?time-window=1440>
