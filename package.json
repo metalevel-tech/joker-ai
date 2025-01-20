@@ -13,6 +13,8 @@
     "deploy:worker": "pnpm run build:worker && wrangler deploy"
   },
   "dependencies": {
+    "browserslist": "^4.24.4",
+    "caniuse-lite": "^1.0.30001695",
     "class-variance-authority": "^0.7.1",
     "cloudflare": "^4.0.0",
     "clsx": "^2.1.1",
