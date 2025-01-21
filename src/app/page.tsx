@@ -1,11 +1,9 @@
 import { askAI } from "@/server/ai/chat";
-import { cacheSet } from "@/server/cache/kv";
 import Image from "next/image";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  void cacheSet();
   const hello = await askAI("Say hello in a friendly and gorgeous way");
 
   return (

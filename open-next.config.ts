@@ -22,9 +22,9 @@ const config = {
     },
   },
 
-  dangerous: {
-    enableCacheInterception: false,
-  },
+  // dangerous: {
+  //   enableCacheInterception: false,
+  // },
 };
 
 export default config;
