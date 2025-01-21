@@ -7,7 +7,7 @@ export async function askAI(prompt: string): Promise<string> {
     const ai = (await getCloudflareContext()).env.AI;
 
     const response = await ai.run("@cf/meta/llama-3.1-8b-instruct", { prompt });
-    return response.text; // Return the response text
+    return response.response; // Return the response text
   } catch (error) {
     console.error("AI Error:", error);
     throw new Error("Failed to fetch AI response");

@@ -2,6 +2,7 @@
 
 # build bundle
 .open-next/*
+.wrangler/*
 
 # dependencies
 /node_modules

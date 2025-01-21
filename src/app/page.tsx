@@ -1,10 +1,20 @@
+"use client";
+
 import { askAI } from "@/server/ai/chat";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
-export default async function Home() {
-  const hello = await askAI("Say hello in a friendly and gorgeous way");
+export default function Home() {
+  const [hello, setHello] = useState<string | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const hello = await askAI("Say hello in a friendly and gorgeous way");
+      setHello(hello);
+    })();
+  });
 
   return (
     <div className='grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
@@ -17,9 +27,10 @@ export default async function Home() {
           height={38}
           priority
         />
+        <div className="my-4">
+          {hello ?? "Loading..."}
+        </div>
         <ol className='list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]'>
-          <li className='mb-2'>{hello}</li>
-
           <li className='mb-2'>
             Get started by editing{" "}
             <code className='bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold'>
