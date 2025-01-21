@@ -8,3 +8,6 @@ assets = { directory = ".open-next/assets", binding = "ASSETS" }
 [[kv_namespaces]]
 binding = "NEXT_CACHE_WORKERS_KV"
 id = "1058c7a7b4d047569e1da57937323ce5"
+
+[ai]
+binding = "AI"

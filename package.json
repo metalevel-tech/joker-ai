@@ -26,6 +26,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250121.0",
     "@eslint/eslintrc": "^3",
     "@opennextjs/cloudflare": "^0.3.8",
     "@types/node": "^20",
