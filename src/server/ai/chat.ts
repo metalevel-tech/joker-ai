@@ -1,6 +1,10 @@
 "use server";
 
 export async function askAI(prompt: string): Promise<string> {
+  if (typeof AI === "undefined") {
+    return "AI is not available. Ensure you are running in the Cloudflare Worker runtime.";
+  }
+
   try {
     // Use the AI binding to run a model
     const response = await AI.run("@cf/meta/llama-3.1-8b-instruct", { prompt });
