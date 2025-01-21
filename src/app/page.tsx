@@ -27,7 +27,7 @@ export default function Home() {
           height={38}
           priority
         />
-        <div className="my-4">
+        <div className="my-4 w-[360px]">
           {hello ?? "Loading..."}
         </div>
         <ol className='list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]'>
