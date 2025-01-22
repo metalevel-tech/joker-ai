@@ -5,9 +5,14 @@ compatibility_flags = ["nodejs_compat"]
 main = ".open-next/worker.js"
 assets = { directory = ".open-next/assets", binding = "ASSETS" }
 
+# wrangler.toml (wrangler v3.88.0^)
+[observability.logs]
+enabled = true
+
 [[kv_namespaces]]
 binding = "NEXT_CACHE_WORKERS_KV"
 id = "1058c7a7b4d047569e1da57937323ce5"
+preview_id = "b5ceed78d98046649ee3016e52d8e0f1"
 
 [ai]
 binding = "AI"

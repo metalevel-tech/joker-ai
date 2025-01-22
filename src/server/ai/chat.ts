@@ -3,6 +3,8 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
 export async function askAI(prompt: string): Promise<string> {
+  console.log("AI Prompt:", prompt);
+
   try {
     const ai = (await getCloudflareContext()).env.AI;
 

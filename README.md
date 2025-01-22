@@ -37,6 +37,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Cloudflare refs
 
+- <https://opennext.js.org/cloudflare/get-started>
 - <https://developers.cloudflare.com/workers/frameworks/framework-guides/nextjs>
 - <https://developers.cloudflare.com/workers/runtime-apis/bindings/>
 - <https://dash.cloudflare.com/4a7a2036848ac74fb634965693b22939/workers/services/view/joker-ai/production>

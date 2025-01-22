@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "build:worker": "opennextjs-cloudflare",
-    "dev:worker": "wrangler dev --port 8771 --ip 0.0.0.0",
+    "dev:worker": "wrangler dev --port 3000 --ip 0.0.0.0 --remote",
+    "dev:worker8771": "wrangler dev --port 8771 --ip 0.0.0.0 --remote",
     "preview:worker": "pnpm run build:worker && pnpm run dev:worker",
     "deploy:worker": "pnpm run build:worker && pnpm dlx wrangler deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
