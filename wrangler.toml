@@ -5,6 +5,9 @@ compatibility_flags = ["nodejs_compat"]
 main = ".open-next/worker.js"
 assets = { directory = ".open-next/assets", binding = "ASSETS" }
 
+[dev]
+host = "dev-worker.metalevel.tech"
+
 # wrangler.toml (wrangler v3.88.0^)
 [observability.logs]
 enabled = true

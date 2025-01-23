@@ -9,14 +9,35 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [hello, setHello] = useState<string | null>(null);
 
-  const handleRequest = async () => {
-    const hello = await askAI("Say hello in a friendly and gorgeous way");
+  const handleRequestChat = async () => {
+    const hello = await askAI({
+      messages: [
+        {
+          role: "system",
+          content: "You are a helpful assistant.",
+        },
+        {
+          role: "user",
+          content: "Hello, how are you?",
+        },
+      ]
+    });
+
+    setHello(hello);
+  };
+  const handleRequestSimple = async () => {
+    const hello = await askAI({
+      prompt: "Hello, how are you? And who are you?"
+    });
+
     setHello(hello);
   };
 
   useEffect(() => {
-    void handleRequest();
+    void handleRequestChat();
   }, []);
+
+  const buttonClassName = 'rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44 cursor-pointer';
 
   return (
     <div className='grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
@@ -35,11 +56,11 @@ export default function Home() {
 
 
         <div className='flex gap-4 items-center flex-col sm:flex-row'>
-          <div
-            className='rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44'
-            onClick={handleRequest}
-          >
-            New greeting
+          <div className={buttonClassName} onClick={handleRequestChat}>
+            Chat
+          </div>
+          <div className={buttonClassName} onClick={handleRequestSimple}>
+            Simple
           </div>
         </div>
       </main>
