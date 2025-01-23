@@ -17,3 +17,4 @@ In order to get server actions working with the AI binding when I'm using `pnpm 
 - <https://developers.cloudflare.com/workers/runtime-apis/bindings/>
 - <https://dash.cloudflare.com/4a7a2036848ac74fb634965693b22939/workers/services/view/joker-ai/production>
 - <https://dash.cloudflare.com/4a7a2036848ac74fb634965693b22939/workers/kv/namespaces/6a845ba65ea34ecc8191ed43f77de123/metrics?time-window=1440>
+- <https://sdk.vercel.ai/providers/community-providers/cloudflare-workers-ai>
