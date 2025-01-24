@@ -43,6 +43,8 @@ I found, in order to get Next.js 'server actions' working with the AI binding, w
 
 It's interesting and maybe side effect, but when you use a Cloudflare tunnel for local development, you can use `pnpm dev` and it have no problems to access the bindings.
 
+You may need to run `pnpm preview:worker` frs in order to get the bindings working, and then you can run `pnpm dev` for local development..
+
 ## References
 
 - <https://opennext.js.org/cloudflare/get-started>

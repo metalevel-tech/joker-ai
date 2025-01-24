@@ -11,7 +11,7 @@ interface AIRequestChat {
 type AIRequest = AIRequestSimple | AIRequestChat;
 
 export async function askAI(chat: AIRequest): Promise<string> {
-  console.log("AI Prompt:", chat);
+  console.log("AI:", chat);
 
   try {
     const ai = (await getCloudflareContext()).env.AI;

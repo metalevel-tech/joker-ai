@@ -1,6 +1,7 @@
 "use client";
 
 import { askAI } from "@/server/ai/chat";
+import { cacheSet } from "@/server/cache/kv";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -23,12 +24,16 @@ export default function Home() {
       ]
     });
 
+    await cacheSet(String(Date.now()), hello);
+
     setHello(hello);
   };
   const handleRequestSimple = async () => {
     const hello = await askAI({
       prompt: "Hello, how are you? And who are you?"
     });
+
+    await cacheSet(String(Date.now()), hello);
 
     setHello(hello);
   };
