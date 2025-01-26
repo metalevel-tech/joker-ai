@@ -1,4 +1,4 @@
-# Joker AI, Cloudflare Worker Boilerplate
+# Cloudflare Worker Boilerplate
 
 This is a Next.js boilerplate app with OpenNext.js. Ready to be deployed to Cloudflare Workers. Below are the instructions to get it up and running. Also a little hack how to get Next.js server actions working with Cloudflare bindings in development mode.
 
@@ -47,9 +47,7 @@ You may need to run `pnpm preview:worker` frs in order to get the bindings worki
 
 ## References
 
-- <https://opennext.js.org/cloudflare/get-started>
-- <https://developers.cloudflare.com/workers/frameworks/framework-guides/nextjs>
-- <https://developers.cloudflare.com/workers/runtime-apis/bindings/>
-- <https://dash.cloudflare.com/4a7a2036848ac74fb634965693b22939/workers/services/view/joker-ai/production>
-- <https://dash.cloudflare.com/4a7a2036848ac74fb634965693b22939/workers/kv/namespaces/6a845ba65ea34ecc8191ed43f77de123/metrics?time-window=1440>
-- <https://sdk.vercel.ai/providers/community-providers/cloudflare-workers-ai>
+- [OpenNEXT Docs](https://opennext.js.org/cloudflare/get-started)
+- [Cloudflare Docs: Products > Workers > Frameworks > Next.js](https://developers.cloudflare.com/workers/frameworks/framework-guides/nextjs)
+- [Cloudflare Docs: Products > Workers > Runtime APIs > Bindings (env)](https://developers.cloudflare.com/workers/runtime-apis/bindings/)
+- [Vercel AI SDK Docs: Community Providers > Cloudflare Workers AI](https://sdk.vercel.ai/providers/community-providers/cloudflare-workers-ai)
