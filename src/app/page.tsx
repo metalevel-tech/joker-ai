@@ -1,6 +1,6 @@
 "use client";
 
-import { askAI } from "@/server/ai/chat";
+import { askAI } from "@/server/ai-sdk/chat";
 import { cacheSet } from "@/server/cache/kv";
 import Image from "next/image";
 import { useEffect, useState } from "react";
