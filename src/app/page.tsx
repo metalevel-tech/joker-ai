@@ -1,48 +1,14 @@
 "use client";
+import { useChat } from 'ai/react';
 
-import { askAI } from "@/server/ai-sdk/chat";
-import { cacheSet } from "@/server/cache/kv";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 // export const dynamic = "force-dynamic";
 
 export default function Home() {
-  const [hello, setHello] = useState<string | null>(null);
 
-  const handleRequestChat = async () => {
-    const hello = await askAI({
-      messages: [
-        {
-          role: "system",
-          content: "You are a helpful assistant.",
-        },
-        {
-          role: "user",
-          content: "Hello, how are you?",
-        },
-      ]
-    });
 
-    await cacheSet(String(Date.now()), hello);
-
-    setHello(hello);
-  };
-  const handleRequestSimple = async () => {
-    const hello = await askAI({
-      prompt: "Hello, how are you? And who are you?"
-    });
-
-    await cacheSet(String(Date.now()), hello);
-
-    setHello(hello);
-  };
-
-  useEffect(() => {
-    void handleRequestChat();
-  }, []);
-
-  const buttonClassName = 'rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44 cursor-pointer';
+  const { messages, input, handleInputChange, handleSubmit } = useChat();
 
   return (
     <div className='grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
@@ -55,23 +21,24 @@ export default function Home() {
           height={38}
           priority
         />
-        <div className="my-4 w-[360px]">
-          {hello ?? "Loading..."}
-        </div>
+        <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
+          {messages.map(m => (
+            <div key={m.id} className="whitespace-pre-wrap">
+              {m.role === 'user' ? 'User: ' : 'AI: '}
+              {m.content}
+            </div>
+          ))}
 
-
-        <div className='flex gap-4 items-center flex-col sm:flex-row'>
-          <div className={buttonClassName} onClick={handleRequestChat}>
-            Chat
-          </div>
-          <div className={buttonClassName} onClick={handleRequestSimple}>
-            Simple
-          </div>
+          <form onSubmit={handleSubmit}>
+            <input
+              className="fixed dark:bg-zinc-900 bottom-0 w-full max-w-md p-2 mb-8 border border-zinc-300 dark:border-zinc-800 rounded shadow-xl"
+              value={input}
+              placeholder="Say something..."
+              onChange={handleInputChange}
+            />
+          </form>
         </div>
       </main>
-      <footer className='row-start-3 flex gap-6 flex-wrap items-center justify-center'>
-        ---
-      </footer>
     </div>
   );
 }
