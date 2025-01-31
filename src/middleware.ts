@@ -1,6 +1,10 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 
-export default clerkMiddleware();
+export default clerkMiddleware({
+	secretKey: (await getCloudflareContext()).env.CLERK_SECRET_KEY,
+
+});
 
 export const config = {
 	matcher: [

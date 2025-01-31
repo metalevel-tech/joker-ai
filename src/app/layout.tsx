@@ -47,6 +47,6 @@ export default function RootLayout({
           </div>
         </body>
       </html>
-    </ClerkProvider >
+    </ClerkProvider>
   );
 }
