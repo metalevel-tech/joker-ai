@@ -130,9 +130,7 @@ pre.language-shell + pre {
   border-bottom: 1px dotted hsl(var(--accent) / 40%);
 }
 
-/* overrides color-values for the Diff Highlight plugin
-   * https://prismjs.com/plugins/diff-highlight/
-   */
+/* https://prismjs.com/plugins/diff-highlight/ */
 pre.diff-highlight > code .token.token.deleted:not(.prefix),
 pre > code.diff-highlight .token.token.deleted:not(.prefix) {
   background-color: hsl(var(--destructive) / 10%);
@@ -162,7 +160,7 @@ pre > code.diff-highlight .token.token.inserted:not(.prefix) {
 
 pre[class*="language-"],
 code[class*="language-"] {
-  /* color: hsl(var(--foreground) / 100%); */
+  color: hsl(var(--foreground) / 100%);
   text-align: left;
   text-shadow: none;
   white-space: pre;

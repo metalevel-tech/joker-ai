@@ -39,7 +39,7 @@ export default function Home() {
         <div className="flex flex-col w-full py-24 mx-auto stretch prose post-body">
           {messages.map((m, index, array) => (
             <Fragment key={m.id}>
-              <div className={cn(m.role === "user" && array[index - 1]?.role !== "user" && "mt-4")}>
+              <div className={cn(((m.role !== "user" && array[index - 1]?.role === "user") || (m.role === "user" && array[index - 1]?.role !== "user")) && "mt-4")}>
                 <div className={cn("flex items-start", m.role === "user" ? "flex-row-reverse" : "flex-row", m.role === "user" && array[index - 1]?.role === "user" && "hidden")}>
                   <div className="py-2 px-4 rounded-3xl bg-primary text-primary-foreground ">
                     {m.role === 'user' ? 'User: ' : 'AI: '}
