@@ -251,7 +251,7 @@ pre[class*="language-"] {
 }
 
 .token.url {
-  color: #797403; /* green2 */
+  color: rgb(59 130 246 / 29%);
   text-decoration: underline;
 }
 
@@ -260,7 +260,7 @@ pre[class*="language-"] {
 }
 
 .token.regex {
-  background: #797403; /* green2 */
+  background: rgba(239, 67, 67, 0.15); /* green2 */
 }
 
 .token.bold {
