@@ -14,7 +14,6 @@ export async function askAI({ messages }: AIRequest) {
 
   try {
     const cs = (await getCloudflareContext()).env.CLERK_SECRET_KEY;
-
     console.log(cs);
 
     const ai = (await getCloudflareContext()).env.AI;
