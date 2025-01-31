@@ -1,8 +1,5 @@
 import {
-  ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut
+  ClerkProvider
 } from '@clerk/nextjs';
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -39,13 +36,7 @@ export default function RootLayout({
         >
           <div className='grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
             <main className='flex flex-col gap-8 row-start-2 items-center sm:items-start w-full max-w-md overflow-hidden'>
-              <SignedOut>
-                <SignInButton />
-              </SignedOut>
-
-              <SignedIn>
-                {children}
-              </SignedIn>
+              {children}
             </main>
           </div>
         </body>
