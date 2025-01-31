@@ -6,7 +6,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -34,6 +33,12 @@ body {
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    /** scrollbar */
+    --scrollbar-track: 0 0% 93% / 0.4;
+    --scrollbar-thumb: 30 30% 68%;
+    --scrollbar-width: 0.525rem;
+    --scrollbar-height: 0.775rem;
+    --scrollbar-thumb-radius: 0.5rem;
   }
 
   .dark {
@@ -61,14 +66,68 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    /** scrollbar */
+    --scrollbar-track: 0 0% 13%;
+    --scrollbar-thumb: 0 0% 60%;
   }
 }
-
 
 @layer base {
   * {
     @apply border-border;
+
+    /* Only for Firefox - the following styles can be applied to Chromium based too,
+       but then they breaks the webkit-scrollbar style */
+    @document url-prefix() {
+      /* scrollbar-width: thin; */
+      /* scrollbar-color: theme("colors.scrollbarThumb.DEFAULT") theme("colors.scrollbarTrack.DEFAULT"); */
+      scrollbar-color: theme("colors.scrollbarThumb.DEFAULT") transparent;
+      scrollbar-gutter: auto;
+    }
+
+    outline: none;
+    color-scheme: light dark;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+
+    ::-webkit-scrollbar {
+      width: calc(theme("spacing.scrollbarWidth") + 0.3rem);
+      height: theme("spacing.scrollbarHeight");
+    }
+
+    ::-webkit-scrollbar-track {
+      background: theme("colors.scrollbarTrack.DEFAULT");
+    }
+
+    ::-webkit-scrollbar-thumb {
+      width: theme("spacing.scrollbarWidth");
+      border: 0.2rem solid transparent;
+      border-radius: theme("borderRadius.scrollbarThumb");
+      background-color: theme("colors.scrollbarThumb.DEFAULT");
+      background-clip: content-box;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: theme("colors.scrollbarThumb.DEFAULT"/50%);
+    }
+
+    ::-webkit-scrollbar-corner {
+      background-color: theme("colors.scrollbarThumb.DEFAULT"/50%);
+    }
+
+    ::-webkit-scrollbar-corner,
+    ::-webkit-scrollbar {
+      overflow: overlay;
+    }
   }
+
+  html,
+  body {
+    min-height: 100vh;
+  }
+
   body {
     @apply bg-background text-foreground;
   }

@@ -37,6 +37,16 @@ export default {
 			colors: {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				scrollbar: {
+					track: "hsl(var(--scrollbar-track))",
+					thumb: "hsl(var(--scrollbar-thumb))",
+				},
+				scrollbarTrack: {
+					DEFAULT: "hsl(var(--scrollbar-track))",
+				},
+				scrollbarThumb: {
+					DEFAULT: "hsl(var(--scrollbar-thumb))",
+				},
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
@@ -79,7 +89,19 @@ export default {
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				sm: 'calc(var(--radius) - 4px)',
+				scrollbarThumb: "var(--scrollbar-thumb-radius)",
+			},
+			spacing: {
+				"90": "22.5rem",
+				"91": "22.75rem",
+				"92": "23rem",
+				"93": "23.25rem",
+				"94": "23.5rem",
+				"95": "23.75rem",
+				"128": "32rem",
+				scrollbarWidth: "var(--scrollbar-width)",
+				scrollbarHeight: "var(--scrollbar-height)",
 			},
 			typography: {
 				DEFAULT: {

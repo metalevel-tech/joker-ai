@@ -18,7 +18,6 @@ export const processMarkdown = ({
   hyphen?: boolean;
   placeholders?: Record<string, string>;
 }) => {
-  // Replace placeholders in the entire markdown string before processing
   let processedMarkdown = markdown.replace(/^"(.*)"$/g, "$1");
 
   for (const [key, value] of Object.entries(placeholders)) {
@@ -41,16 +40,3 @@ export const processMarkdown = ({
 
   return resultStr;
 };
-
-export const splitDescriptionKeyword = /<!--\s*more\s*-->/;
-// We want to remove all comments. It is not done
-// by unified().use(remarkRehype), because we are
-// using some of them as special tags, i.e. <!--more-->
-
-export const commentsMatcher = new RegExp("<!--.*?-->", "gs");
-
-// export const commentsMatcher = /<!--.*?-->/gs;
-// The above throws unresolvable error with TS 5.5.2
-// TS1501: This regular expression flag is only available when targeting 'es2018' or later.
-// Update the target in tsconfig.json does not help.
-// https://github.com/microsoft/TypeScript/issues/58275

@@ -14,14 +14,13 @@ export default function Home() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
 
   return (
-    <>
-
+    <main className='flex flex-col gap-8 row-start-2 items-center sm:items-start w-full max-w-lg overflow-hidden'>
       <SignedOut>
         <SignInButton />
       </SignedOut>
 
       <SignedIn>
-        <div className='flex flex-row justify-between w-full max-w-md'>
+        <div className='flex flex-row justify-between w-full max-w-lg'>
 
           <Image
             className='dark:invert'
@@ -55,7 +54,7 @@ export default function Home() {
 
           <form onSubmit={handleSubmit} className='w-full overflow-hidden'>
             <input
-              className="fixed dark:bg-zinc-900 bottom-0 w-full p-2 mb-8 border border-zinc-300 dark:border-zinc-800 rounded shadow-xl max-w-md"
+              className="fixed dark:bg-zinc-900 bottom-0 w-full p-2 mb-8 border-2 border-zinc-300 dark:border-zinc-800 rounded-2xl shadow-xl max-w-lg"
               value={input}
               placeholder="Say something..."
               onChange={handleInputChange}
@@ -63,8 +62,6 @@ export default function Home() {
           </form>
         </div>
       </SignedIn>
-
-
-    </>
+    </main>
   );
 }
