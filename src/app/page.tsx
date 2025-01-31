@@ -1,10 +1,12 @@
 "use client";
+import { cn } from '@/lib/cn-utils';
+import { processMarkdown } from '@/lib/md/process-markdown';
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 import { useChat } from 'ai/react';
 
 import Image from "next/image";
+import { Fragment } from 'react';
 
-export const dynamic = "force-dynamic";
 
 export default function Home() {
 
@@ -34,12 +36,21 @@ export default function Home() {
         </div>
 
 
-        <div className="flex flex-col w-full py-24 mx-auto stretch">
-          {messages.map(m => (
-            <div key={m.id} className="whitespace-pre-wrap">
-              {m.role === 'user' ? 'User: ' : 'AI: '}
-              {m.content}
-            </div>
+        <div className="flex flex-col w-full py-24 mx-auto stretch prose post-body">
+          {messages.map((m, index, array) => (
+            <Fragment key={m.id}>
+              <div className={cn(m.role === "user" && array[index - 1]?.role !== "user" && "mt-4")}>
+                <div className={cn("flex items-start", m.role === "user" ? "flex-row-reverse" : "flex-row", m.role === "user" && array[index - 1]?.role === "user" && "hidden")}>
+                  <div className="py-2 px-4 rounded-3xl bg-primary text-primary-foreground ">
+                    {m.role === 'user' ? 'User: ' : 'AI: '}
+                  </div>
+                </div>
+
+                <div className={cn("flex items-start mt-1", m.role === "user" ? "flex-row-reverse" : "flex-row")}>
+                  <div className="py-2 px-4 rounded-3xl bg-secondary overflow-hidden" dangerouslySetInnerHTML={{ __html: processMarkdown({ markdown: m.content }) }} />
+                </div>
+              </div>
+            </Fragment>
           ))}
 
           <form onSubmit={handleSubmit} className='w-full overflow-hidden'>
