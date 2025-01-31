@@ -3,6 +3,7 @@
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { CoreMessage, streamText } from 'ai';
 import { createWorkersAI } from 'workers-ai-provider';
+import { cacheGet } from "../cache/kv";
 
 interface AIRequestChat {
   messages: Array<CoreMessage>;
@@ -15,8 +16,9 @@ export async function askAI({ messages }: AIRequest) {
   try {
     const ai = (await getCloudflareContext()).env.AI;
     const workersai = createWorkersAI({ binding: ai });
+    const modelName = await cacheGet("model");
 
-    const model = workersai("@cf/meta/llama-3.1-8b-instruct", {
+    const model = workersai(modelName, {
       // additional settings
       safePrompt: false,
     });

@@ -39,6 +39,8 @@ body {
     --scrollbar-width: 0.525rem;
     --scrollbar-height: 0.775rem;
     --scrollbar-thumb-radius: 0.5rem;
+    /** Prose */
+    --tw-prose-pre-bg: var(--background);
   }
 
   .dark {

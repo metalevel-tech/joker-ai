@@ -8,7 +8,7 @@ export async function cacheGet(key: string) {
   try {
     const kv = (await getCloudflareContext()).env.NEXT_CACHE_WORKERS_KV;
     const value = await kv.get(key);
-    return value;
+    return JSON.parse(value);
   } catch (error) {
     console.error(error);
   }

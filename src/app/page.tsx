@@ -1,17 +1,21 @@
 "use client";
+import { SelectModel } from '@/components/SelectModel';
 import { cn } from '@/lib/cn-utils';
 import { processMarkdown } from '@/lib/md/process-markdown';
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
+import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from '@clerk/nextjs';
 import { useChat } from 'ai/react';
-
-import Image from "next/image";
-import { Fragment } from 'react';
-
+import { Fragment, useEffect, useRef } from 'react';
 
 export default function Home() {
-
-
   const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const endOfMessagesRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to the bottom whenever messages update
+  useEffect(() => {
+    endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  const user = useUser();
 
   return (
     <main className='flex flex-col gap-8 row-start-2 items-center sm:items-start w-full max-w-lg overflow-hidden'>
@@ -20,28 +24,22 @@ export default function Home() {
       </SignedOut>
 
       <SignedIn>
-        <div className='flex flex-row justify-between w-full max-w-lg'>
-
-          <Image
-            className='dark:invert'
-            src='/next.svg'
-            alt='Next.js logo'
-            width={180}
-            height={38}
-            priority
-          />
-
-          <UserButton />
+        <div className='fixed top-0 left-0 w-full '>
+          <div className='flex flex-row justify-between py-2 px-2 drop-shadow-sm bg-background/75 backdrop-blur-sm z-50 max-w-xl mx-auto rounded-xl border-2 border-zinc-400/20 mt-4'>
+            <SelectModel />
+            <div className='scale-110 flex items-center'>
+              <UserButton />
+            </div>
+          </div>
         </div>
 
-
-        <div className="flex flex-col w-full py-24 mx-auto stretch prose post-body">
+        <div className="flex flex-col w-full py-12 mx-auto stretch prose post-body">
           {messages.map((m, index, array) => (
             <Fragment key={m.id}>
               <div className={cn(((m.role !== "user" && array[index - 1]?.role === "user") || (m.role === "user" && array[index - 1]?.role !== "user")) && "mt-4")}>
                 <div className={cn("flex items-start", m.role === "user" ? "flex-row-reverse" : "flex-row", m.role === "user" && array[index - 1]?.role === "user" && "hidden")}>
                   <div className="py-2 px-4 rounded-3xl bg-primary text-primary-foreground ">
-                    {m.role === 'user' ? 'User: ' : 'AI: '}
+                    {m.role === 'user' ? user.user?.fullName || 'User' : 'JAI'}
                   </div>
                 </div>
 
@@ -52,12 +50,23 @@ export default function Home() {
             </Fragment>
           ))}
 
-          <form onSubmit={handleSubmit} className='w-full overflow-hidden'>
-            <input
-              className="fixed dark:bg-zinc-900 bottom-0 w-full p-2 mb-8 border-2 border-zinc-300 dark:border-zinc-800 rounded-2xl shadow-xl max-w-lg"
+          <div ref={endOfMessagesRef} />
+
+          <form onSubmit={(e) => e.preventDefault()} className='fixed bottom-0 w-full left-0 max-xs:p-3'>
+            <textarea
+              className="w-full px-3 py-3 mb-0 xs:mb-8 border-2 rounded-xl shadow-xl max-w-lg resize-none whitespace-pre-wrap mx-auto block"
               value={input}
               placeholder="Say something..."
               onChange={handleInputChange}
+              rows={Math.min(3, input.split('\n').length)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  if (e.ctrlKey || e.metaKey) {
+                    e.preventDefault();
+                    handleSubmit(e);
+                  }
+                }
+              }}
             />
           </form>
         </div>

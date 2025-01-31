@@ -55,6 +55,10 @@
   content: none;
 }
 
+.prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  background-color: theme("colors.background");
+}
+
 /** Links with code blocks */
 .prose
   :where(a code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
