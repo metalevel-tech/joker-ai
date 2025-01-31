@@ -5,4 +5,6 @@ interface CloudflareEnv {
 	NEXTJS_ENV: string;
 	AI: Ai;
 	ASSETS: Fetcher;
+	CLERK_SECRET_KEY: string;
+	NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: string;
 }
