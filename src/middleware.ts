@@ -1,10 +1,11 @@
 import { clerkMiddleware } from "@clerk/nextjs/server";
-import { getCloudflareContext } from "@opennextjs/cloudflare";
 
-export default clerkMiddleware({
-	secretKey: (await getCloudflareContext()).env.CLERK_SECRET_KEY,
-	publishableKey: (await getCloudflareContext()).env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
-});
+// import { getCloudflareContext } from "@opennextjs/cloudflare";
+// export default clerkMiddleware({
+// 	secretKey: (await getCloudflareContext()).env.CLERK_SECRET_KEY,
+// 	publishableKey: (await getCloudflareContext()).env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+// });
+export default clerkMiddleware();
 
 export const config = {
 	matcher: [
