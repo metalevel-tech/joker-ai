@@ -9,14 +9,16 @@ import { Fragment, useEffect, useRef } from 'react';
 export function Chat() {
 	const { messages, setMessages, input, handleInputChange, handleSubmit, isLoading, stop } = useChat({
 		// Throttle the messages and data updates to 50ms:
-		experimental_throttle: 50
+		// experimental_throttle: 50
 	});
 	const endOfMessagesRef = useRef<HTMLDivElement>(null);
 	const textareaRef = useRef<HTMLTextAreaElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
+
 	useEffect(() => {
 		endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+		endOfMessagesRef.current?.scrollIntoView();
 	}, [messages]);
 
 	const { user } = useUser();
@@ -38,16 +40,14 @@ export function Chat() {
 
 				return (
 					<Fragment key={m.id}>
-						<div className={cn(isNextSection && "mt-4")}>
-							<div className={cn("flex items-start", isCurrentUser ? "flex-row-reverse" : "flex-row", isCurrentUser && isPreviousUser && "hidden")}>
-								<div className={cn("py-2 px-4 rounded-3xl bg-primary text-primary-foreground font-semibold", isCurrentUser && "rounded-br-lg", isCurrentAssistant && "rounded-bl-lg")}>
-									{m.role === 'user' ? username : 'JAI'}
-								</div>
+						<div key={`${m.id}_role`} className={cn("flex items-start", isCurrentUser ? "flex-row-reverse" : "flex-row", isCurrentUser && isPreviousUser && "hidden", isNextSection && "mt-4")}>
+							<div className={cn("py-2 px-4 rounded-3xl bg-primary text-primary-foreground font-semibold", isCurrentUser && "rounded-br-lg", isCurrentAssistant && "rounded-bl-lg")}>
+								{m.role === 'user' ? username : 'JAI'}
 							</div>
+						</div>
 
-							<div className={cn("flex items-start mt-1", isCurrentUser ? "flex-row-reverse" : "flex-row")}>
-								<div className={cn("py-2 px-4 rounded-3xl bg-secondary overflow-hidden", isCurrentUser && isNextSection && "rounded-tr-lg", isCurrentAssistant && isNextSection && "rounded-tl-lg")} dangerouslySetInnerHTML={{ __html: processMarkdown({ markdown: m.content }) }} />
-							</div>
+						<div key={`${m.id}_msg`} className={cn("flex items-start mt-1", isCurrentUser ? "flex-row-reverse" : "flex-row")}>
+							<div className={cn("py-2 px-4 rounded-3xl bg-secondary overflow-hidden", isCurrentUser && isNextSection && "rounded-tr-lg", isCurrentAssistant && isNextSection && "rounded-tl-lg")} dangerouslySetInnerHTML={{ __html: processMarkdown({ markdown: m.content }) }} />
 						</div>
 					</Fragment>
 				);
