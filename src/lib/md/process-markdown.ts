@@ -7,7 +7,6 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 
-
 const new_tab_target = '_blank';
 
 export const processMarkdown = ({
