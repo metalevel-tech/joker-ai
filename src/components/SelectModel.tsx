@@ -1,62 +1,67 @@
 "use client";
 
-import { Check, ChevronsUpDown } from "lucide-react";
-import * as React from "react";
-
-import { Button } from "@/components/ui/button";
-import {
-	Command,
-	CommandEmpty,
-	CommandGroup,
-	CommandInput,
-	CommandItem,
-	CommandList,
-} from "@/components/ui/command";
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/cn-utils";
 import { cacheGet, cacheSet } from "@/server/cache/kv";
+import { useEffect, useState } from "react";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "./ui/select";
 
 const models = [
 	{
-		value: "@cf/meta/llama-3-8b-instruct",
-		label: "llama-3-8b-instruct",
-	},
-	{
-		value: "@cf/meta/llama-3.1-8b-instruct",
-		label: "llama-3.1-8b-instruct",
+		value: "@cf/meta/llama-3.2-1b-instruct",
+		label: "1b: llama-3.2-1b-instruct",
 	},
 	{
 		value: "@cf/meta/llama-3.2-3b-instruct",
-		label: "llama-3.2-3b-instruct",
+		label: "3b: llama-3.2-3b-instruct",
+	},
+	{
+		value: "@cf/meta/llama-3-8b-instruct",
+		label: "8b: llama-3-8b-instruct",
+	},
+	{
+		value: "@cf/meta/llama-3.1-8b-instruct",
+		label: "8b: llama-3.1-8b-instruct",
 	},
 	{
 		value: "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
-		label: "llama-3.3-70b-instruct-fp8-fast",
+		label: "70b: llama-3.3-70b-instruct-fp8-fast",
 	},
 	{
 		value: "@cf/mistral/mistral-7b-instruct-v0.1",
-		label: "mistral-7b-instruct-v0.1",
+		label: "7b: mistral-7b-instruct-v0.1",
 	},
 	{
 		value: "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
-		label: "deepseek-r1-distill-qwen-32b",
+		label: "32B: deepseek-r1-distill-qwen-32b",
+	},
+	{
+		value: "@hf/thebloke/deepseek-coder-6.7b-base-awq",
+		label: "7B: deepseek-coder-6.7b-base-awq",
+	},
+	{
+		value: "@hf/thebloke/deepseek-coder-6.7b-instruct-awq",
+		label: "7B: deepseek-coder-6.7b-instruct-awq",
+	},
+	{
+		value: "@cf/defog/sqlcoder-7b-2",
+		label: "7B: sqlcoder-7b-2",
+	},
+	{
+		value: "@cf/meta/m2m100-1.2b",
+		label: "2B: m2m100-1.2b (translation)",
 	},
 ];
 
 export function SelectModel() {
-	const [open, setOpen] = React.useState(false);
-	const [value, setValue] = React.useState(models[0].value);
+	const [value, setValue] = useState(models[0].value);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		(async () => {
 			try {
 				const model = await cacheGet("model");
 
-				setValue(model);
+				if (models.some((m) => m.value === model)) {
+					setValue(model);
+				}
 			} catch (error) {
 				console.error(error);
 			}
@@ -69,48 +74,18 @@ export function SelectModel() {
 	};
 
 	return (
-		<Popover open={open} onOpenChange={setOpen}>
-			<PopoverTrigger asChild>
-				<Button
-					variant="outline"
-					role="combobox"
-					aria-expanded={open}
-					className="w-[260px] justify-between"
-				>
-					{value
-						? models.find((model) => model.value === value)?.label
-						: "Select model..."}
-					<ChevronsUpDown className="opacity-50" />
-				</Button>
-			</PopoverTrigger>
-			<PopoverContent className="w-[260px] p-0">
-				<Command>
-					<CommandInput placeholder="Search model..." />
-					<CommandList>
-						<CommandEmpty>No model found.</CommandEmpty>
-						<CommandGroup>
-							{models.map((model) => (
-								<CommandItem
-									key={model.value}
-									value={model.value}
-									onSelect={(currentValue) => {
-										handleSetValue(currentValue === value ? "" : currentValue);
-										setOpen(false);
-									}}
-								>
-									{model.label}
-									<Check
-										className={cn(
-											"ml-auto",
-											value === model.value ? "opacity-100" : "opacity-0"
-										)}
-									/>
-								</CommandItem>
-							))}
-						</CommandGroup>
-					</CommandList>
-				</Command>
-			</PopoverContent>
-		</Popover>
+		<Select value={value} onValueChange={handleSetValue}>
+			<SelectTrigger className="w-[300px]">
+				<SelectValue placeholder="Select a model" />
+			</SelectTrigger>
+			<SelectContent>
+				<SelectGroup>
+					<SelectLabel>Models</SelectLabel>
+					{models.map((model) => (
+						<SelectItem value={model.value} key={model.value}>{model.label}</SelectItem>
+					))}
+				</SelectGroup>
+			</SelectContent>
+		</Select>
 	);
 }
