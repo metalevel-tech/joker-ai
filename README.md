@@ -1,6 +1,9 @@
-# Cloudflare Worker Boilerplate
+# Joker AI: Cloudflare Worker Boilerplate
 
-This is a Next.js boilerplate app with OpenNext.js. Ready to be deployed to Cloudflare Workers. Below are the instructions to get it up and running. Also a little hack how to get Next.js server actions working with Cloudflare bindings in development mode.
+This is a Next.js + [Clerk](https://clerk.com/) boilerplate app with [OpenNext.js]((https://opennext.js.org/cloudflare/get-started). Ready to be deployed to [Cloudflare Workers](https://workers.cloudflare.com/). Below are the instructions to get it up and running. Also a little hack how to get Next.js server actions working with Cloudflare bindings in development mode. For boilerplate withour Clerk one can check the repository [nextjs-cloudflare-worker-boilerplate](https://github.com/metalevel-tech/nextjs-cloudflare-worker-boilerplate).
+
+In this repo, React has been downgraded to version **React 18** because it is approximately 100KB smaller than React 19. This reduction allows us to stay within the 3MB limit imposed by the Cloudflare Workers [Free Plan](https://developers.cloudflare.com/workers/platform/limits/#worker-size), even with ~90KB allocated for our code.
+
 
 ## Setup and First Deploy
 
